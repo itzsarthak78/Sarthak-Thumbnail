@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarthak Thumbnails · designer</title>
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* -------------------- CSS (animations, layout, styling) -------------------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: #f4f2ee;
+            color: #1f1a12;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* custom scroll */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #e6ddd0; }
+        ::-webkit-scrollbar-thumb { background: #b68b40; border-radius: 20px; }
+
+        /* animations */
+        @keyframes floatUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        section, .card, .review-card, .contact-item, .hero-placeholder {
+            animation: floatUp 0.7s cubic-bezier(0.12, 0.71, 0.33, 1) both;
+        }
+
+        /* navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            background: rgba(255, 250, 240, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.03);
+            position: sticky;
+            top: 0;
+            z-index: 99;
+            border-bottom: 1px solid #edd6b0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(145deg, #a57128, #4d3a1f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links a {
+            margin-left: 2.2rem;
+            text-decoration: none;
+            color: #2f281b;
+            font-weight: 500;
+            transition: 0.2s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+        .nav-links a:hover { border-bottom-color: #c0964b; color: #825d27; }
+
+        .order-btn-nav {
+            background: #1f1a12;
+            color: #ffefd6 !important;
+            padding: 0.5rem 1.6rem;
+            border-radius: 60px;
+            margin-left: 2rem;
+            border: 1px solid #eeb76b;
+        }
+        .order-btn-nav:hover {
+            background: #b68b40;
+            color: #16130c !important;
+            border-color: #2b2216;
+        }
+
+        /* container */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        /* hero placeholder (no thumbnails) */
+        .hero-placeholder {
+            background: #e9dfcf;
+            border-radius: 70px;
+            padding: 2.5rem 2rem;
+            margin: 2rem 0 2rem;
+            border: 3px dashed #ac8b58;
+            text-align: center;
+            color: #3b301f;
+            font-size: 1.5rem;
+            box-shadow: inset 0 2px 10px #cdb48b;
+        }
+        .hero-placeholder i { font-size: 3.2rem; color: #7e623b; margin-bottom: 0.5rem; }
+
+        /* about */
+        .about-card {
+            background: white;
+            border-radius: 3rem 3rem 3rem 3rem;
+            padding: 2.5rem 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 30px 30px -24px #bba47c;
+            border-left: 12px solid #e1b16a;
+            transition: 0.2s;
+        }
+        .about-card h2 { font-size: 2.6rem; font-weight: 700; }
+        .exp-badge {
+            background: #d9b880;
+            padding: 0.4rem 1.8rem;
+            border-radius: 60px;
+            display: inline-block;
+            font-weight: 600;
+            margin: 0.5rem 0 1rem;
+            color: #23200b;
+        }
+
+        /* reviews grid */
+        .reviews-section h2 { font-size: 2.2rem; margin-bottom: 0.2rem; }
+        .reviews-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            justify-content: center;
+            margin: 2.5rem 0 1rem;
+        }
+        .review-card {
+            background: white;
+            padding: 1.8rem 1.5rem;
+            border-radius: 32px;
+            flex: 1 1 240px;
+            max-width: 280px;
+            box-shadow: 0 20px 25px -20px #5f4f37;
+            transition: all 0.3s ease;
+            border: 1px solid #f7e1c1;
+        }
+        .review-card:hover {
+            transform: translateY(-10px) scale(1.01);
+            background: #fffbf3;
+            box-shadow: 0 30px 30px -18px #b68b40;
+        }
+        .review-text { font-style: italic; margin: 0.6rem 0; color: #2f2a1f; }
+        .review-name { font-weight: 800; color: #644f2e; }
+
+        /* contact */
+        .contact-section {
+            background: #20231f;
+            color: #fcf3e2;
+            border-radius: 4rem 4rem 2rem 2rem;
+            padding: 2.5rem 2.5rem;
+            margin: 3rem 0;
+        }
+        .contact-flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-top: 1.5rem;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255,235,200,0.08);
+            padding: 0.9rem 2.2rem;
+            border-radius: 100px;
+            font-size: 1.2rem;
+            border: 1px solid #b29158;
+        }
+        .contact-item a {
+            color: #ffdaa2;
+            text-decoration: none;
+            border-bottom: 1px dotted #ba8d4b;
+        }
+        .contact-item a:hover { color: white; }
+
+        /* order main button */
+        .order-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 3rem 0 2rem;
+        }
+        .order-giant {
+            background: #13100a;
+            border: 2px solid #d8a951;
+            color: #f9e5c1;
+            font-size: 2.2rem;
+            font-weight: 700;
+            padding: 1rem 4rem;
+            border-radius: 120px;
+            cursor: pointer;
+            box-shadow: 0 26px 32px -14px #ac874b;
+            transition: 0.25s;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .order-giant:hover {
+            background: #b68b40;
+            color: #16110a;
+            border-color: #ffe4b1;
+            transform: scale(1.03);
+            box-shadow: 0 36px 40px -14px #9e742e;
+        }
+
+        /* admin panel (hidden by default, shown after login) */
+        .admin-section {
+            background: #1b1c22;
+            border-radius: 3rem;
+            padding: 2rem 2.2rem;
+            margin: 3rem 0;
+            color: #dbd1bd;
+            border: 2px solid #ad873d;
+            display: none;
+        }
+        .admin-section.visible { display: block; }
+
+        .admin-login-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .admin-login-row input {
+            padding: 0.9rem 1.5rem;
+            border-radius: 60px;
+            border: none;
+            background: #2d2f3a;
+            color: white;
+            font-size: 1rem;
+            width: 240px;
+        }
+        .admin-btn {
+            background: #cfaa69;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .admin-btn:hover { background: #e5c38b; }
+        .admin-logout { background: #4b3f2b; color: white; }
+
+        .admin-editor {
+            margin-top: 2rem;
+        }
+        .admin-field {
+            margin: 1.2rem 0;
+        }
+        .admin-field label { display: block; margin-bottom: 0.3rem; }
+        .admin-field input, .admin-field textarea {
+            width: 100%;
+            padding: 0.8rem 1.2rem;
+            border-radius: 40px;
+            border: none;
+            background: #2b2c33;
+            color: #efdfc3;
+            border: 1px solid #7a643f;
+        }
+        .admin-field textarea { border-radius: 28px; }
+
+        .thumb-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .thumb-list {
+            background: #2d2f3a;
+            border-radius: 40px;
+            padding: 1.2rem;
+            min-height: 70px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+        }
+        .thumb-item {
+            background: #4f4e5e;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            border: 1px solid #b68b40;
+        }
+
+        .review-note {
+            background: #f8e8d4;
+            padding: 1rem 2rem;
+            border-radius: 60px;
+            color: #3d2e15;
+            margin: 1rem 0 2rem;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0 1.5rem;
+            opacity: 0.7;
+        }
+
+        /* responsiveness */
+        @media (max-width: 650px) {
+            .navbar { flex-direction: column; gap: 0.7rem; }
+            .nav-links a { margin: 0 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar">
+        <span class="logo">🖌️ sarthak thumbnails</span>
+        <div class="nav-links">
+            <a href="#about">about</a>
+            <a href="#reviews">reviews</a>
+            <a href="#contact">contact</a>
+            <a href="#" id="navOrderBtn" class="order-btn-nav"><i class="fa-regular fa-paper-plane"></i> order</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- HERO (no thumbnails, just placeholder) -->
+        <div class="hero-placeholder">
+            <i class="fa-regular fa-image"></i>
+            <h3>sample thumbnails area — empty (admin can upload later)</h3>
+            <p style="font-size: 1.1rem;">no thumbnails displayed right now, as requested</p>
+        </div>
+
+        <!-- ========== ABOUT SECTION (editable) ========== -->
+        <section id="about" class="about-card">
+            <h2 id="aboutNameDisplay">I'm Sarthak Kumar</h2>
+            <div class="exp-badge" id="aboutExpDisplay">⭐ 3+ years experience · thumbnail expert</div>
+            <p id="aboutDescDisplay">I create click‑through thumbnails for gamers, educators & faceless channels. more than 500 designs delivered, CTR boost guaranteed.</p>
+        </section>
+
+        <!-- ========== REVIEWS (fake, not shown in dashboard) ========== -->
+        <section id="reviews" class="reviews-section">
+            <h2>❤️ what creators say</h2>
+            <div class="review-note"><i class="fa-regular fa-message"></i> genuine feedback — hidden from admin dashboard</div>
+            <div class="reviews-grid" id="reviewsContainer"></div>
+        </section>
+
+        <!-- ========== ORDER BIG BUTTON (scrolls to contact) ========== -->
+        <div class="order-wrapper">
+            <button class="order-giant" id="mainOrderBtn"><i class="fa-regular fa-hand-pointer"></i> Order your thumbnail <i class="fa-regular fa-arrow-down"></i></button>
+        </div>
+
+        <!-- ========== CONTACT SECTION (telegram + gmail) ========== -->
+        <section id="contact" class="contact-section">
+            <h2 style="font-size: 2.2rem;">📮 let's work together</h2>
+            <div class="contact-flex">
+                <div class="contact-item"><i class="fab fa-telegram"></i> <a href="https://t.me/SensieSarthak" target="_blank">@SensieSarthak</a></div>
+                <div class="contact-item"><i class="fa-regular fa-envelope"></i> <a href="mailto:itzsarthak78@gmail.com">itzsarthak78@gmail.com</a></div>
+            </div>
+            <p style="text-align: center; margin-top: 2rem;">⚡ fastest reply on Telegram — DM for order</p>
+        </section>
+
+        <!-- ========== ADMIN PANEL (password protected) ========== -->
+        <section class="admin-section" id="adminPanel">
+            <h3 style="color: #ebc17e;">🔐 admin dashboard</h3>
+            <div class="admin-login-row">
+                <input type="password" id="adminPassword" placeholder="enter password (Sarthak12)">
+                <button class="admin-btn" id="loginAdminBtn">unlock</button>
+                <button class="admin-btn admin-logout" id="logoutAdminBtn" style="display: none;">logout</button>
+            </div>
+
+            <div id="adminContent" style="display: none;">
+                <!-- edit about -->
+                <div class="admin-editor">
+                    <h4>✏️ edit about section</h4>
+                    <div class="admin-field">
+                        <label>your name</label>
+                        <input type="text" id="editName" value="Sarthak Kumar">
+                    </div>
+                    <div class="admin-field">
+                        <label>experience badge</label>
+                        <input type="text" id="editExp" value="3+ years experience">
+                    </div>
+                    <div class="admin-field">
+                        <label>about description</label>
+                        <textarea id="editDesc" rows="3">I create click‑through thumbnails for gamers, educators & faceless channels. more than 500 designs delivered, CTR boost guaranteed.</textarea>
+                    </div>
+                    <button class="admin-btn" id="saveAboutBtn">update about</button>
+                </div>
+
+                <!-- thumbnail manager (only admin side) -->
+                <h4 style="margin-top: 2.5rem;">🖼️ thumbnail manager (upload / delete)</h4>
+                <div class="thumb-controls">
+                    <input type="text" id="thumbTitle" placeholder="eg. 'dark souls thumbnail'" style="flex:1; padding:0.8rem 1.2rem; border-radius:60px; border:none; background:#2b2c33; color:white;">
+                    <button class="admin-btn" id="addThumbBtn">➕ add sample</button>
+                    <button class="admin-btn" id="deleteThumbBtn">🗑️ delete last</button>
+                </div>
+                <div class="thumb-list" id="adminThumbList">
+                    <span style="color:#bcac8f;">no thumbnails yet (empty as requested)</span>
+                </div>
+                <p style="font-size:0.9rem; margin-top:1rem; color:#bfa98b;">* thumbnails only appear here, not in main gallery (per your instruction)</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© Sarthak Thumbnails — designs with impact</p>
+    </footer>
+
+    <!-- ========== JAVASCRIPT (all interactions) ========== -->
+    <script>
+        (function() {
+            // ---------------- FAKE REVIEWS (static, hardcoded, no dashboard visibility) ----------------
+            const reviews = [
+                { name: 'Riya Kapoor', text: 'Sarthak bhai ne mera channel hi badal diya! Thumbnail lit 🔥 3 saal exp sahi me dikhta.' },
+                { name: 'Aryan Singh', text: 'best thumbnail maker I’ve worked with. got 42k views in 2 days! thank you' },
+                { name: 'Pooja Sharma', text: 'bahut mast design, aura alag hai. will order again fr' },
+                { name: 'Karan Mehta', text: 'professional, quick aur hindi/english dono mein vibe samjha. highly recommend' },
+                { name: 'Divya Patel', text: 'CTR literally doubled! Sarthak is a magician. thanks bhai' },
+                { name: 'Rahul Yadav', text: 'bhai ne thumbnail bana ke mera video viral kar diya 🙏 solid work' },
+            ];
+
+            const reviewsContainer = document.getElementById('reviewsContainer');
+            function displayReviews() {
+                let html = '';
+                reviews.forEach(r => {
+                    html += `<div class="review-card">
+                        <i class="fa-solid fa-quote-left" style="color: #b68b40;"></i>
+                        <div class="review-text">“${r.text}”</div>
+                        <div class="review-name">- ${r.name}</div>
+                    </div>`;
+                });
+                reviewsContainer.innerHTML = html;
+            }
+            displayReviews();
+
+            // ---------------- ADMIN PANEL LOGIC ----------------
+            const adminPanel = document.getElementById('adminPanel');
+            const pwdInput = document.getElementById('adminPassword');
+            const loginBtn = document.getElementById('loginAdminBtn');
+            const logoutBtn = document.getElementById('logoutAdminBtn');
+            const adminContent = document.getElementById('adminContent');
+
+            // about elements
+            const aboutNameDisplay = document.getElementById('aboutNameDisplay');
+            const aboutExpDisplay = document.getElementById('aboutExpDisplay');
+            const aboutDescDisplay = document.getElementById('aboutDescDisplay');
+            const editName = document.getElementById('editName');
+            const editExp = document.getElementById('editExp');
+            const editDesc = document.getElementById('editDesc');
+            const saveAbout = document.getElementById('saveAboutBtn');
+
+            // thumbnail elements
+            const thumbTitle = document.getElementById('thumbTitle');
+            const addThumb = document.getElementById('addThumbBtn');
+            const deleteThumb = document.getElementById('deleteThumbBtn');
+            const adminThumbList = document.getElementById('adminThumbList');
+
+            // thumbnail array (empty as requested)
+            let thumbnails = [];
+
+            function renderAdminThumbList() {
+                if (thumbnails.length === 0) {
+                    adminThumbList.innerHTML = '<span style="color:#bcac8f;">📭 no thumbnails (empty as requested)</span>';
+                } else {
+                    let items = '';
+                    thumbnails.forEach(t => {
+                        items += `<span class="thumb-item">🖼️ ${t}</span>`;
+                    });
+                    adminThumbList.innerHTML = items;
+                }
+            }
+            renderAdminThumbList();
+
+            // login with password 'Sarthak12'
+            loginBtn.addEventListener('click', function() {
+                if (pwdInput.value === 'Sarthak12') {
+                    adminPanel.classList.add('visible');
+                    adminContent.style.display = 'block';
+                    loginBtn.style.display = 'none';
+                    logoutBtn.style.display = 'inline-block';
+                    pwdInput.disabled = true;
+                } else {
+                    alert('incorrect password (use Sarthak12)');
+                }
+            });
+
+            logoutBtn.addEventListener('click', function() {
+                adminPanel.classList.remove('visible');
+                adminContent.style.display = 'none';
+                loginBtn.style.display = 'inline-block';
+                logoutBtn.style.display = 'none';
+                pwdInput.disabled = false;
+                pwdInput.value = '';
+            });
+
+            // update about section from admin
+            saveAbout.addEventListener('click', function() {
+                const newName = editName.value.trim();
+                const newExp = editExp.value.trim();
+                const newDesc = editDesc.value.trim();
+
+                if (newName) aboutNameDisplay.innerText = `I'm ${newName}`;
+                if (newExp) aboutExpDisplay.innerText = `⭐ ${newExp} · thumbnail expert`;
+                if (newDesc) aboutDescDisplay.innerText = newDesc;
+
+                alert('about section updated successful
